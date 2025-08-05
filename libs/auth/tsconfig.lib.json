@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "root": "libs/auth",
+  "compilerOptions": {
+    "sourceRoot": "libs/auth/src"
+  },
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/libs/auth",
+        "main": "libs/auth/src/index.ts",
+        "tsConfig": "libs/auth/tsconfig.lib.json"
+      }
+    }
+  },
+  "implicitDependencies": ["data"]
+}

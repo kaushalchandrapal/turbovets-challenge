@@ -1,13 +1,12 @@
+// app/app.ts
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
 
 @Component({
-  imports: [NxWelcome, RouterModule],
+  standalone: true,
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrl: './app.scss',
+  styleUrls: ['./app.scss'],
+  imports: [RouterModule],
 })
-export class App {
-  protected title = 'dashboard';
-}
+export class App {}

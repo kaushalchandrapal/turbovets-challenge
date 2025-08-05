@@ -1,0 +1,52 @@
+<div class="flex justify-end mb-4">
+  <button (click)="onSubmit()" class="button-base button-primary">
+    Create Task
+  </button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4" *ngIf="tasks$ | async as tasks">
+  <ng-container *ngFor="let status of taskStatusList">
+    <div
+      class="bg-bg-200 p-4 rounded shadow"
+      cdkDropList
+      [id]="status + '-list'"
+      [cdkDropListData]="tasks[status]"
+      [cdkDropListConnectedTo]="connectedDropLists"
+      (cdkDropListDropped)="onDrop($event, status)"
+    >
+      <h2 class="text-lg font-semibold mb-4 text-center">{{ formatStatus(status) }}</h2>
+
+      <div
+        *ngFor="let task of tasks[status]; trackBy: trackByTaskId"
+        cdkDrag
+        [cdkDragData]="task"
+        class="bg-white rounded-lg shadow p-4 mb-4 w-full"
+      >
+        <div class="w-full flex justify-end  gap-3">
+
+          <button
+            class="text-gray-400 hover:text-primary-300"
+            (click)="editTask(task)"
+            aria-label="Edit Task"
+          >
+            <fa-icon [icon]="faPen" class="w-4 h-4 text-bg-100"></fa-icon>
+          </button>
+          <button
+            class="text-gray-400 hover:text-primary-300"
+            (click)="deleteTask(task.id)"
+            aria-label="Edit Task"
+          >
+            <fa-icon [icon]="faTrash" class="w-4 h-4 text-red-600"></fa-icon>
+          </button>
+        </div>
+        <h3 class="text-xl font-semibold text-primary-300">{{ task.title }}</h3>
+        <p class="text-sm text-gray-600 mt-1">{{ task.description }}</p>
+      </div>
+    </div>
+    <app-edit-task-modal
+      *ngIf="showModal"
+      [task]="selectedTask"
+      (close)="onCloseModal()"
+    />
+  </ng-container>
+</div>

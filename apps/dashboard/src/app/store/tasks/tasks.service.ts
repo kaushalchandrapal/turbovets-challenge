@@ -20,7 +20,7 @@ export class TaskService {
   
   createTask(dto: CreateTaskDto): Observable<ITask> {
     return this.http.post<ITask>(`${this.apiUrl}`, dto);
-}
+  }
 
   updateTaskOrder(dto: UpdateTaskOrderDto, taskId: number): Observable<void> {
     return this.http.patch<void>(`${this.apiUrl}/${taskId}`, {

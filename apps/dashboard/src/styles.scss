@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './component.scss';
+
+
+:root {
+  --primary-100: #E7D1BB;
+  --primary-200: #c8b39e;
+  --primary-300: #84725e;
+  --accent-100: #A096A5;
+  --accent-200: #463e4b;
+  --text-100: #A096A2;
+  --text-200: #847a86;
+  --bg-100: #ffffff;
+  --bg-200: #f7f7f7;
+  --bg-300: #e5e5e5;
+
+  --green: #4ADE80;
+  --red: #F87171;
+}
+
+.dark {
+  --bg-100: #151931;
+  --bg-200: #252841;
+  --bg-300: #3d3f5b;
+  --text-100: #A096A2;
+  --text-200: #847a86;
+}
+
+.snackbar-style {
+  z-index: 9999 !important;
+  background-color: white !important;
+  border: 2px solid var(--primary-300) !important;
+  color: var(--primary-300) !important;
+  padding: 1rem 1.5rem !important;
+  border-radius: 0.5rem !important;
+  font-weight: 500;
+}
+
+.snackbar-success {
+  background-color: var(--green) !important;
+  color: var(--accent-200) !important;
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 12px 16px;
+}
+
+.snackbar-error {
+  background-color: var(--red) !important;
+  color: white !important;
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 12px 16px;
+}

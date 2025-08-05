@@ -1,0 +1,15 @@
+<div class="min-h-screen bg-bg-300 text-white">
+  <header class="bg-bg-100 px-6 py-4 flex items-center justify-between shadow">
+    <h1 class="text-xl font-semibold">My Dashboard</h1>
+    <nav class="space-x-4">
+      <a [routerLink]="['/dashboard/task']" class="hover:underline">Tasks</a>
+      <button (click)="logout()" class="button-base bg-bg-300">
+        Logout
+      </button>
+    </nav>
+  </header>
+
+  <main class="p-6">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,30 @@
+<div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow p-6 w-full max-w-lg relative">
+    <div class="flex justify-between">
+      <h3 class="text-xl font-semibold flex-1 text-primary-300 mb-4">Edit Task</h3>
+      <button
+        class="text-gray-400 hover:text-primary-300"
+        (click)="closeEditTask()"
+        aria-label="Close Edit Task"
+      >
+        <fa-icon [icon]="faWindowClose" class="w-4 h-4 text-bg-100"></fa-icon>
+      </button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+        <input type="text" formControlName="title" class="input-base" />
+      </div>
+      <div class="mb-4">
+        <label for="title" class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea formControlName="description" class="input-base"></textarea>
+      </div>
+
+      <div class="flex justify-end gap-2">
+        <button type="button" (click)="onClose()" class="button-danger">Cancel</button>
+        <button type="submit" class="button-base button-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

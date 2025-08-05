@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@turbovets-challenge/auth/*": ["libs/auth/src/lib/*"],
+      "@turbovets-challenge/data/*": ["libs/data/src/lib/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

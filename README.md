@@ -28,10 +28,128 @@ DATABASE_NAME=turbovets_challenge
 
 ### 4. Run Backend
 ```bash
-nx serve api
+npx nx run api:serve:development --verbose
 ```
 
-### 4. Run Backend
+### 5. Run Frontend
 ```bash
-nx serve api
+npx nx serve dashboard --verbose | less
 ```
+
+## 🧱 Architecture Overview
+```kotlin
+turbovets-challenge/
+│
+├── apps/
+│   ├── api/        → NestJS backend
+│   └── dashboard/  → Angular frontend
+│
+├── libs/
+│   ├── data/       → Shared interfaces and DTOs
+│   └── auth/       → Reusable RBAC decorators, guards, and logic
+```
+- Nx Monorepo: Unified workspace for backend and frontend.
+- libs/data: Shared models across apps.
+- libs/data: Shared models across apps.
+
+## 🗃️ Data Model Explanation
+### Entities and Relationships
+- **User**
+  - `id`: Primary Key
+  - `email`: Unique
+  - `name`
+  - `password`: Hashed
+  - `role`: Enum (OWNER, ADMIN, VIEWER)
+  - `organizationId`: Foreign Key → Organization
+  - `createdAt`
+  - `updatedAt`
+
+- **Organization**
+  - `id`: Primary Key
+  - `name`
+  - `parentOrganizationId`: Nullable (Self-referencing FK)
+  
+- **Task**
+  - `id`: Primary Key
+  - `title`
+  - `description`
+  - `createdBy`: Foreign Key → User
+  - `organizationId`: Foreign Key → Organization
+  - `status`: Enum (PENDING, IN_PROGRESS, DONE)
+  - `order`: number (ordering in status column)
+  - `createdAt`
+  - `updatedAt`
+
+### Enums
+ - **Role** - OWNER, ADMIN, VIEWER 
+ - **TaskStatus** - PENDING, IN_PROGRESS, DONE 
+
+## 🔐 Access Control Implementation
+### JWT Auth
+- Issued on login.
+
+### Guards & Decorators
+- @Roles('ADMIN'), @Roles('OWNER'), @Roles('VIEWER')
+
+### Organizational Scoping
+- Users can only access tasks in their own org.
+- Hierarchy supports multi-level org delegation.
+
+## 📡 API Docs
+### 🔐 Auth
+- POST /auth/login
+```json
+{
+  "email": "admin@example.com",
+  "password": "secure123"
+}
+```
+
+Response
+```json
+{
+  "access_token": "JWT_TOKEN"
+}
+```
+
+- POST /auth/register
+```json
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "T3sting1@",
+  "role": "OWNER",
+  "organizationId": "1"
+}
+```
+
+### 📋 Tasks
+- GET /tasks - get All tasks (according to status)
+- POST /tasks
+```json
+{
+  "title": "Design UI",
+  "description": "Homepage layout",
+  "status": "PENDING"
+}
+```
+
+- PATCH /tasks/:id
+```json 
+{
+  "newIndex": 2,
+  "newStatus": "PENDING",
+}
+```
+
+- DELETE /tasks/:id
+
+## 🔮 Future Considerations
+### ✅ Advanced Role Delegation
+- Custom roles and dynamic permission assignment.
+
+### 🔁 JWT Refresh Tokens
+- Implement secure refresh/rotation mechanism.
+
+## 🧑‍💻 Contributors
+- @kaushalchandrapal

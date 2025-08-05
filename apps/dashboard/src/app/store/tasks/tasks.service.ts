@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ITask, ITaskStatusResponse } from '@turbovets-challenge/data/interfaces';
 import { environment } from '../../environment';
-import { Task } from '@turbovets-challenge/data/entities';
 import { CreateTaskDto, UpdateTaskOrderDto } from '@turbovets-challenge/data/dtos';
 
 @Injectable({
